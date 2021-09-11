@@ -11,7 +11,6 @@ JSON_DIR = os.path.dirname(__file__)
 def index(request):
     context = {
         'title': 'GeekShop',
-        'user': 'username',
     }
     return render(request, 'products/index.html', context)
 
@@ -19,7 +18,6 @@ def index(request):
 def products(request):
     context = {
         'title': 'GeekShop - Каталог',
-        'user': 'username',
         'products': Product.objects.all(),
         'category': ProductsCategory.objects.all(),
         }
