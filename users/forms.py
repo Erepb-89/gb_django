@@ -26,7 +26,7 @@ class UserProfileForm(UserChangeForm):
         if data[0].isdigit():
             raise forms.ValidationError('Имя пользователя не может начинаться с цифры')
         elif len(data) < 2:
-            raise forms.ValidationError('Имя пользователя слишкрм короткое, рекомендуется сменить его на более длинное')
+            raise forms.ValidationError('Имя пользователя слишком короткое, рекомендуется сменить его на более длинное')
         return data
 
     def clean_first_name(self):

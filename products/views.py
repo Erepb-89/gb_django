@@ -20,7 +20,7 @@ def products(request):
         'title': 'GeekShop - Каталог',
         'products': Product.objects.all(),
         'category': ProductsCategory.objects.all(),
-        }
+    }
     # context['products'] = Product.objects.all()
 
     return render(request, 'products/products.html', context)
