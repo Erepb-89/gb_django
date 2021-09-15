@@ -41,11 +41,11 @@ class UserProfileForm(UserChangeForm):
             raise forms.ValidationError('Фамилия не может начинаться с цифры')
         return data
 
-    def clean_image(self):
-        data = self.cleaned_data['image']
-        if data.size > 2048000:
-            raise forms.ValidationError('Слишком большой файл')
-        return data
+    # def clean_image(self):
+    #     data = self.cleaned_data['image']
+    #     if data.size > 2048000:
+    #         raise forms.ValidationError('Слишком большой файл')
+    #     return data
 
 
 class UserLoginForm(AuthenticationForm):
