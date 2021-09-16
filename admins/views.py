@@ -1,10 +1,12 @@
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 
-from admins.forms import UserAdminRegisterForm, UserAdminProfileForm
+from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryCreateForm, ProductCreateForm
 from users.models import User
+from products.models import ProductsCategory, Product
 
 
 # Create your views here.
@@ -13,6 +15,59 @@ def index(request):
     return render(request, 'admins/admin.html')
 
 
+# Категории
+@user_passes_test(lambda u: u.is_superuser)
+def admin_categories(request):
+    context = {
+        'categories': ProductsCategory.objects.all()
+    }
+    return render(request, 'admins/admin-categories.html', context)
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_categories_create(request):
+    if request.method == "POST":
+        form = CategoryCreateForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Категория успешно саздана')
+            return HttpResponseRedirect(reverse('admins:admin_categories'))
+    else:
+        form = CategoryCreateForm()
+    context = {
+        'title': 'GeekShop - Админ | Создание категории',
+        'form': form
+    }
+    return render(request, 'admins/admin-categories-create.html', context)
+
+
+# Товары
+@user_passes_test(lambda u: u.is_superuser)
+def admin_products(request):
+    context = {
+        'products': Product.objects.all()
+    }
+    return render(request, 'admins/admin-products.html', context)
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_products_create(request):
+    if request.method == "POST":
+        form = ProductCreateForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Продукт успешно добавлен')
+            return HttpResponseRedirect(reverse('admins:admin_products'))
+    else:
+        form = ProductCreateForm()
+    context = {
+        'title': 'GeekShop - Админ | Создание продукта',
+        'form': form
+    }
+    return render(request, 'admins/admin-products-create.html', context)
+
+
+# Юзеры
 @user_passes_test(lambda u: u.is_superuser)
 def admin_users(request):
     context = {
