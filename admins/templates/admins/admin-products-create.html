@@ -31,7 +31,6 @@
                         <div class="col-lg-6">
                             <label class="small mb-1">Изображение</label>
                             <div class="custom-file">
-{#                                <label class="small mb-1">Изображение</label>#}
                                 {{ form.image }}
                                 <label class="custom-file-label" for="{{ form.image.id_for_label }}">Выберите
                                     изображение</label>
@@ -46,7 +45,6 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="{{ form.price.id_for_label }}">Цена</label>
-{#                                <input type="number" name="quantity" value="5" class="vIntegerField" min="0" required="" id="id_quantity">#}
                                 {{ form.price }}
                             </div>
                         </div>
@@ -59,7 +57,10 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="{{ form.category.id_for_label }}">Категория</label>
-                                {{ form.category }}
+                                <div>
+                                    {{ form.category }}
+                                </div>
+
                             </div>
                         </div>
                     </div>

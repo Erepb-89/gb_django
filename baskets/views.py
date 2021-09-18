@@ -41,6 +41,7 @@ def baskets_edit(request, id, quantity):
         return JsonResponse({'result': result})
 
 
+@login_required
 def baskets_remove(request, id):
     Basket.objects.get(id=id).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

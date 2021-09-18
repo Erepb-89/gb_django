@@ -5,6 +5,19 @@
         <main>
             <div class="container-fluid">
                 <h1 class="mt-4">Создание пользователя</h1>
+                {% if messages or form.errors %}
+                    <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %}">
+                        {% if messages %}
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        {% else %}
+                            {% if form.errors %}
+                                {{ form.errors }}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
                 <form action="{% url 'admins:admin_users_create' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row">
