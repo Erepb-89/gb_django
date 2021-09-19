@@ -30,7 +30,7 @@ def admin_categories_create(request):
         form = CategoryAdminForm(data=request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Категория успешно саздана')
+            messages.success(request, 'Категория успешно создана')
             return HttpResponseRedirect(reverse('admins:admin_categories'))
     else:
         form = CategoryAdminForm()
