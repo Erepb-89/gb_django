@@ -3,6 +3,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
+from django.utils.decorators import method_decorator
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, ProductAdminForm, CategoryAdminForm
 from users.models import User
@@ -16,12 +19,19 @@ def index(request):
 
 
 # Категории
-@user_passes_test(lambda u: u.is_superuser)
-def admin_categories(request):
-    context = {
-        'categories': ProductsCategory.objects.all()
-    }
-    return render(request, 'admins/admin-categories.html', context)
+class CategoriesListView(ListView):
+    model = ProductsCategory
+    context_object_name = 'categories'
+    template_name = 'admins/admin-categories.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CategoriesListView, self).get_context_data(**kwargs)
+        context['title'] = 'Админка | Категории товаров'
+        return context
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(CategoriesListView, self).dispatch(request, *args, **kwargs)
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -69,12 +79,19 @@ def admin_categories_delete(request, id):
 
 
 # Товары
-@user_passes_test(lambda u: u.is_superuser)
-def admin_products(request):
-    context = {
-        'products': Product.objects.all()
-    }
-    return render(request, 'admins/admin-products.html', context)
+class ProductsListView(ListView):
+    model = Product
+    context_object_name = 'products'
+    template_name = 'admins/admin-products.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductsListView, self).get_context_data(**kwargs)
+        context['title'] = 'Админка | Продукты'
+        return context
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProductsListView, self).dispatch(request, *args, **kwargs)
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -122,12 +139,19 @@ def admin_products_delete(request, id):
 
 
 # Юзеры
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users(request):
-    context = {
-        'users': User.objects.all()
-    }
-    return render(request, 'admins/admin-users-read.html', context)
+class UserListView(ListView):
+    model = User
+    context_object_name = 'users'
+    template_name = 'admins/admin-users-read.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(UserListView, self).get_context_data(**kwargs)
+        context['title'] = 'Админка | Пользователи'
+        return context
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserListView, self).dispatch(request, *args, **kwargs)
 
 
 @user_passes_test(lambda u: u.is_superuser)
