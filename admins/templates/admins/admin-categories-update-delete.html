@@ -4,7 +4,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Редактирование категории | {{ categories_select.name }}</h1>
+                <h1 class="mt-4">Редактирование категории | {{ productscategory.name }}</h1>
                 {% if messages or form.errors %}
                     <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %}">
                         {% if messages %}
@@ -19,7 +19,7 @@
                     </div>
                 {% endif %}
                 <div class="card-body">
-                    <form action="{% url 'admins:admin_categories_update' categories_select.id %}" method="post"
+                    <form action="{% url 'admins:admin_categories_update' productscategory.id %}" method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-row">
@@ -37,13 +37,19 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                    <div class="row">
-                        <div class="col-lg-12" style="margin-top: 33px;">
-                            <a class="btn btn-danger btn-block"
-                               href="{% url 'admins:admin_categories_delete' categories_select.id %}">Удалить</a>
+                        <div class="form-row">
+                            <div class="col-lg-12" style="margin-top: 33px;">
+                                <input class="btn btn-info btn-block" type="submit" value="Сохранить">
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                    <form action="{% url 'admins:admin_categories_delete' productscategory.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <input class="btn btn-danger btn-block" style="margin-top: 33px;" value="Удалить"
+                                   type="submit">
+                        </div>
+                    </form>
                 </div>
             </div>
         </main>

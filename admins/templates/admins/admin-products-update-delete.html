@@ -4,7 +4,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Редактирование продукта | {{ products_select.name }}</h1>
+                <h1 class="mt-4">Редактирование продукта | {{ product.name }}</h1>
                 {% if messages or form.errors %}
                     <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %}">
                         {% if messages %}
@@ -19,7 +19,7 @@
                     </div>
                 {% endif %}
                 <div class="card-body">
-                    <form action="{% url 'admins:admin_products_update' products_select.id %}" method="post"
+                    <form action="{% url 'admins:admin_products_update' product.id %}" method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-row">
@@ -71,12 +71,14 @@
                             </div>
                         </div>
                     </form>
-                    <div class="row">
-                        <div class="col-lg-12" style="margin-top: 33px;">
-                            <a class="btn btn-danger btn-block"
-                               href="{% url 'admins:admin_products_delete' products_select.id %}">Удалить</a>
+
+                    <form action="{% url 'admins:admin_products_delete' product.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <input class="btn btn-danger btn-block" style="margin-top: 33px;" value="Удалить"
+                                   type="submit">
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </main>
