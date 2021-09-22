@@ -62,7 +62,6 @@
                                 <input class="btn btn-info btn-block" type="submit" value="Сохранить">
                             </div>
                         </div>
-
                         <form action="{% url 'admins:admin_users_delete' user.id %}" method="post">
                             {% csrf_token %}
                             <div class="form-row">
