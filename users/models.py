@@ -5,3 +5,4 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class User(AbstractUser):
     image = models.ImageField(upload_to='users_image', blank=True)
+    age = models.PositiveIntegerField(verbose_name='возраст', default=18)
