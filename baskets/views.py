@@ -37,7 +37,7 @@ def baskets_edit(request, id, quantity):
         context = {
             'baskets': baskets
         }
-        result = render_to_string('baskets/baskets.html', context)
+        result = render_to_string('baskets/baskets.html', context, request=request)
         return JsonResponse({'result': result})
 
 

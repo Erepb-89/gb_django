@@ -19,9 +19,7 @@
                                 {{ message }}
                             {% endfor %}
                         {% else %}
-                            {% if form.errors %}
-                                {{ form.errors }}
-                            {% endif %}
+                            {{ form.errors }}
                         {% endif %}
                     </div>
                 {% endif %}
@@ -54,6 +52,12 @@
                                 <label class="custom-file-label" for="{{ form.image.id_for_label }}">Выберите
                                     изображение</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label class="small mb-1" for="{{ form.age.id_for_label }}">Возраст пользователя</label>
+                            {{ form.age }}
                         </div>
                     </div>
                     <div class="form-row">

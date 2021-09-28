@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import os
-import json
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import DetailView
 
 from products.models import Product, ProductsCategory
 
@@ -14,6 +14,17 @@ def index(request):
         'title': 'GeekShop',
     }
     return render(request, 'products/index.html', context)
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product'
+    template_name = 'products/product.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['title'] = 'GeekShop'
+        return context
 
 
 def products(request, id=None, page=1):

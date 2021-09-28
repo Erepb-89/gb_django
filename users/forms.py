@@ -1,6 +1,9 @@
+import hashlib
+import random
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
 
+import users.models
 from users.models import User
 
 
@@ -10,19 +13,21 @@ class UserProfileForm(UserChangeForm):
     first_name = forms.CharField(widget=forms.TextInput())
     last_name = forms.CharField(widget=forms.TextInput())
     image = forms.ImageField(widget=forms.FileInput(), required=False)
+    age = forms.IntegerField(widget=forms.NumberInput(), required=False)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'image')
+        fields = ('username', 'email', 'first_name', 'last_name', 'image', 'age')
 
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
+        self.fields['age'].widget.attrs['placeholder'] = 'Введите возраст'
         self.fields['first_name'].widget.attrs['placeholder'] = 'Введите имя'
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите фамилюю'
         for field_name, field in self.fields.items():
-           field.widget.attrs['class'] = 'form-control py-4'
+            field.widget.attrs['class'] = 'form-control py-4'
 
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
 
@@ -64,6 +69,7 @@ class UserLoginForm(AuthenticationForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
+
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput())
     email = forms.CharField(widget=forms.EmailInput())
@@ -80,7 +86,6 @@ class UserRegisterForm(UserCreationForm):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
         self.fields['email'].widget.attrs['placeholder'] = 'Введите эл. почту'
-        self.fields['age'].widget.attrs['placeholder'] = 'Введите возраст'
         self.fields['first_name'].widget.attrs['placeholder'] = 'Введите имя'
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите фамилию'
         self.fields['password1'].widget.attrs['placeholder'] = 'Введите пароль'
@@ -88,3 +93,17 @@ class UserRegisterForm(UserCreationForm):
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if User.objects.get(email=data):
+            raise forms.ValidationError('Данный ящик уже зарегистрирован на сайте')
+        return data
+
+    def save(self, commit=True):
+        user = super(UserRegisterForm, self).save()
+        user.is_active = False
+        salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:6]
+        user.activation_key = hashlib.sha1((user.email + salt).encode('utf-8')).hexdigest()
+        user.save()
+        return user
