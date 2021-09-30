@@ -88,6 +88,6 @@ def verify(request, email, activation_key):
             user.is_active = True
             user.save()
             auth.login(request, user)
-        render(request, 'users/verification.html')
+        return render(request, 'users/verification.html')
     except Exception as e:
         return HttpResponseRedirect(reverse('index'))

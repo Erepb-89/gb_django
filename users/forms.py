@@ -94,11 +94,6 @@ class UserRegisterForm(UserCreationForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
-    def clean_email(self):
-        data = self.cleaned_data['email']
-        if User.objects.get(email=data):
-            raise forms.ValidationError('Данный ящик уже зарегистрирован на сайте')
-        return data
 
     def save(self, commit=True):
         user = super(UserRegisterForm, self).save()
