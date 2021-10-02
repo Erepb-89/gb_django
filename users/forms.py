@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django import forms
 
 import users.models
-from users.models import User
+from users.models import User, UserProfile
 
 
 class UserProfileForm(UserChangeForm):
@@ -102,3 +102,17 @@ class UserRegisterForm(UserCreationForm):
         user.activation_key = hashlib.sha1((user.email + salt).encode('utf-8')).hexdigest()
         user.save()
         return user
+
+class UserProfileEditForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ('tagline', 'gender', 'about_me')
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileEditForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name != 'gender':
+                field.widget.attrs['class'] = 'form-control py-4'
+            else:
+                field.widget.attrs['class'] = 'form-control'

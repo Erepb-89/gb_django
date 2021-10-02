@@ -6,7 +6,7 @@ from django.conf import settings
 
 from django.core.mail import send_mail
 
-from .forms import UserLoginForm, UserRegisterForm, UserProfileForm
+from .forms import UserLoginForm, UserRegisterForm, UserProfileForm, UserProfileEditForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -53,15 +53,18 @@ def register(request):
 def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST, instance=request.user, files=request.FILES)
-        if form.is_valid():
+        profile_form = UserProfileEditForm(data=request.POST, instance=request.user.userprofile)
+        if form.is_valid() and profile_form.is_valid():
             form.save()
             messages.success(request, 'Данные успешно изменены')
             return HttpResponseRedirect(reverse('users:profile'))
     else:
         form = UserProfileForm(instance=request.user)
+        profile_form = UserProfileEditForm(instance=request.user.userprofile)
     context = {
         'title': 'GeekShop - Профиль',
-        'form': form
+        'form': form,
+        'profile_form': profile_form
     }
     return render(request, 'users/profile.html', context)
 
