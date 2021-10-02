@@ -56,12 +56,6 @@
                     </div>
                     <div class="form-row">
                         <div class="col-lg-6">
-                            <label class="small mb-1" for="{{ form.age.id_for_label }}">Возраст пользователя</label>
-                            {{ form.age }}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-lg-6">
                             <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>
                             {{ form.username }}
                         </div>
@@ -80,6 +74,16 @@
                         <div class="col-lg-6">
                             <label class="small mb-1" for="{{ profile_form.gender.id_for_label }}">Пол</label>
                             {{ profile_form.gender }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label class="small mb-1" for="{{ profile_form.langs.id_for_label }}">Языки</label>
+                            {{ profile_form.langs }}
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="small mb-1" for="{{ profile_form.userid.id_for_label }}">Сслыка на страницу</label>
+                            {{ profile_form.userid }}
                         </div>
                     </div>
                     <div class="form-row">
