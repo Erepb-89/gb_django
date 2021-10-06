@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'baskets',
     'admins',
     'social_django',
+    'ordersapp',
 ]
 
 MIDDLEWARE = [
@@ -152,6 +153,7 @@ EMAIL_FILE_PATH = 'tmp/emails/'
 # EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
 # python -m smtpd -n -c DebuggingServer localhost:25
 LOGIN_ERROR_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
