@@ -109,25 +109,6 @@ class ProfileFormView(LoginRequiredMixin, UpdateView):
             'profile_form': profile_form
         })
 
-# @login_required
-# def profile(request):
-#     if request.method == 'POST':
-#         form = UserProfileForm(data=request.POST, instance=request.user, files=request.FILES)
-#         profile_form = UserProfileEditForm(data=request.POST, instance=request.user.userprofile)
-#         if form.is_valid() and profile_form.is_valid():
-#             form.save()
-#             messages.success(request, 'Данные успешно изменены')
-#             return HttpResponseRedirect(reverse('users:profile'))
-#     else:
-#         form = UserProfileForm(instance=request.user)
-#         profile_form = UserProfileEditForm(instance=request.user.userprofile)
-#     context = {
-#         'title': 'GeekShop - Профиль',
-#         'form': form,
-#         'profile_form': profile_form
-#     }
-#     return render(request, 'users/profile.html', context)
-
 
 def logout(request):
     auth.logout(request)
