@@ -1,41 +1,41 @@
 [
   {
     "model": "products.productscategory",
-    "pk": 25,
+    "pk": 1,
     "fields": {
-      "name": "Новинки",
+      "name": "РћРґРµР¶РґР°",
+      "description": "Р’РµСЂС…РЅСЏСЏ РѕРґРµР¶РґР°"
+    }
+  },
+  {
+    "model": "products.productscategory",
+    "pk": 2,
+    "fields": {
+      "name": "РџРѕРґР°СЂРєРё",
       "description": ""
     }
   },
   {
     "model": "products.productscategory",
-    "pk": 26,
+    "pk": 3,
     "fields": {
-      "name": "Подарки",
+      "name": "РђРєСЃРµСЃСЃСѓР°СЂС‹",
       "description": ""
     }
   },
   {
     "model": "products.productscategory",
-    "pk": 27,
+    "pk": 4,
     "fields": {
-      "name": "Одежда",
+      "name": "РћР±СѓРІСЊ",
       "description": ""
     }
   },
   {
     "model": "products.productscategory",
-    "pk": 28,
+    "pk": 5,
     "fields": {
-      "name": "Аксессуары",
-      "description": ""
-    }
-  },
-  {
-    "model": "products.productscategory",
-    "pk": 29,
-    "fields": {
-      "name": "Обувь",
+      "name": "РќРѕРІРёРЅРєРё",
       "description": ""
     }
   }
