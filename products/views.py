@@ -28,7 +28,7 @@ class ProductDetailView(DetailView):
 
 
 def products(request, id=None, page=1):
-    products = Product.objects.filter(category_id=id) if id is not None and id != 0 else Product.objects.all()
+    products = Product.objects.filter(category_id=id).select_related('category') if id is not None and id != 0 else Product.objects.all().select_related()
     paginator = Paginator(products, per_page=3)
     try:
         products_paginator = paginator.page(page)
