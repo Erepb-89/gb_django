@@ -32,18 +32,18 @@ class Basket(models.Model):
 
     @property
     def _baskets(self):
-        return Basket.objects.filter(user=self.user)
+        return self.get_items_cached
+
+    @cached_property
+    def get_items_cached(self):
+        return self.user.basket.select_related()
 
     def total_quantity(self):
         return sum(basket.quantity for basket in self._baskets)
 
     def total_sum(self):
         baskets = self.get_items_cached
-        return sum(basket.sum() for basket in baskets)
-
-    @cached_property
-    def get_items_cached(self):
-        return self.user.basket.select_related()
+        return sum(basket.sum() for basket in self._baskets)
 
     @staticmethod
     def get_item(pk):
