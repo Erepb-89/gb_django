@@ -44,6 +44,7 @@ class Basket(models.Model):
     def total_sum(self):
         return sum(basket.sum() for basket in self._baskets)
 
+
     @staticmethod
     def get_item(pk):
         return Basket.objects.get(pk=pk).quantity
