@@ -66,7 +66,7 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['title'] = 'GeekShop'
         context['product'] = get_product(self.kwargs.get('pk'))
-        # context['categories'] = ProductsCategory.objects.all()
+        context['categories'] = ProductsCategory.objects.all()
         return context
 
 
@@ -75,7 +75,7 @@ class ProductDetailView(DetailView):
 def products(request, id=None, page=1):
     products = Product.objects.filter(category_id=id).select_related(
         'category') if id is not None and id != 0 else Product.objects.all().select_related()
-    products = get_links_product()
+    # products = get_links_product()
     paginator = Paginator(products, per_page=3)
     try:
         products_paginator = paginator.page(page)
@@ -86,7 +86,7 @@ def products(request, id=None, page=1):
 
     context = {
         'title': 'GeekShop - Каталог',
-        'category': get_links_category(),
+        'category': ProductsCategory.objects.filter(is_active=True),
         'products': products_paginator
     }
 
