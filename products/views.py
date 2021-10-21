@@ -66,7 +66,7 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['title'] = 'GeekShop'
         context['product'] = get_product(self.kwargs.get('pk'))
-        context['categories'] = ProductsCategory.objects.all()
+        # context['categories'] = ProductsCategory.objects.all()
         return context
 
 
