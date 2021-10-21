@@ -10,7 +10,7 @@ from django.http import JsonResponse
 # Create your views here.
 @login_required
 def baskets_add(request, id):
-    product = Product.objects.get(id=id)
+    product = Product.objects.get(id=id).select_related()
     baskets = Basket.objects.filter(user=request.user, product=product)
     if not baskets.exists():
         Basket.objects.create(user=request.user, product=product, quantity=1)

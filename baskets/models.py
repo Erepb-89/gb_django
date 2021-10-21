@@ -42,7 +42,6 @@ class Basket(models.Model):
         return sum(basket.quantity for basket in self._baskets)
 
     def total_sum(self):
-        baskets = self.get_items_cached
         return sum(basket.sum() for basket in self._baskets)
 
     @staticmethod
