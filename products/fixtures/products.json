@@ -7,8 +7,8 @@
       "image": "products_images/Adidas-hoodie.png",
       "description": "Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.",
       "price": "6090.00",
-      "quantity": 3,
-      "category": 25
+      "quantity": 6,
+      "category": 1
     }
   },
   {
@@ -20,7 +20,7 @@
       "description": "Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый пуховый наполнитель.",
       "price": "23725.00",
       "quantity": 32,
-      "category": 26
+      "category": 3
     }
   },
   {
@@ -32,7 +32,7 @@
       "description": "Материал с плюшевой текстурой. Удобный и мягкий.",
       "price": "3390.00",
       "quantity": 32,
-      "category": 27
+      "category": 1
     }
   },
   {
@@ -44,7 +44,7 @@
       "description": "Плотная ткань. Легкий материал..",
       "price": "2340.00",
       "quantity": 3,
-      "category": 28
+      "category": 4
     }
   },
   {
@@ -56,7 +56,7 @@
       "description": "Гладкий кожаный верх. Натуральный материал.",
       "price": "13590.00",
       "quantity": 21,
-      "category": 29
+      "category": 5
     }
   },
   {
@@ -67,8 +67,8 @@
       "image": "products_images/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png",
       "description": "Легкая эластичная ткань сирсакер Фактурная ткань.",
       "price": "2890.00",
-      "quantity": 123,
-      "category": 29
+      "quantity": 15,
+      "category": 2
     }
   }
 ]

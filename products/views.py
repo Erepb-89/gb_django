@@ -70,7 +70,7 @@ class ProductDetailView(DetailView):
         return context
 
 
-@never_cache
+# @never_cache
 # @cache_page(3600)
 def products(request, id=None, page=1):
     products = Product.objects.filter(category_id=id).select_related(
