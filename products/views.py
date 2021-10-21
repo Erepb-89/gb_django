@@ -5,6 +5,8 @@ from django.views.generic import DetailView
 from django.core.cache import cache
 from django.conf import settings
 
+from django.views.decorators.cache import cache_page
+
 from products.models import Product, ProductsCategory
 
 JSON_DIR = os.path.dirname(__file__)
@@ -68,10 +70,11 @@ class ProductDetailView(DetailView):
         return context
 
 
+@cache_page(3600)
 def products(request, id=None, page=1):
     products = Product.objects.filter(category_id=id).select_related(
         'category') if id is not None and id != 0 else Product.objects.all().select_related()
-    products = get_links_product()
+    # products = get_links_product()
     paginator = Paginator(products, per_page=3)
     try:
         products_paginator = paginator.page(page)
@@ -82,7 +85,7 @@ def products(request, id=None, page=1):
 
     context = {
         'title': 'GeekShop - Каталог',
-        'category': get_links_category(),
+        'category': ProductsCategory.objects.filter(is_active=True),
         'products': products_paginator
     }
 
