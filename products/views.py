@@ -57,6 +57,7 @@ def index(request):
     return render(request, 'products/index.html', context)
 
 
+@cache_page(3600)
 class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product'
@@ -71,7 +72,7 @@ class ProductDetailView(DetailView):
 
 
 # @never_cache
-# @cache_page(3600)
+@cache_page(3600)
 def products(request, id=None, page=1):
     products = Product.objects.filter(category_id=id).select_related(
         'category') if id is not None and id != 0 else Product.objects.all().select_related()
