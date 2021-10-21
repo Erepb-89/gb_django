@@ -57,7 +57,6 @@ def index(request):
     return render(request, 'products/index.html', context)
 
 
-@cache_page(3600)
 class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product'
