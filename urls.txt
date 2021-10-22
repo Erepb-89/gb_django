@@ -1,25 +1,2 @@
-http://89.108.77.14/	products.views.index	index
-http://89.108.77.14/baskets/baskets_add/<int:id>	baskets.views.baskets_add	baskets:baskets_add
-http://89.108.77.14/baskets/delete/<int:id>	baskets.views.baskets_remove	baskets:baskets_remove
-http://89.108.77.14/baskets/edit/<int:id>/<int:quantity>/	baskets.views.baskets_edit	baskets:baskets_edit
-http://89.108.77.14/complete/<str:backend>/	social_django.views.complete	social:complete
-http://89.108.77.14/disconnect/<str:backend>/	social_django.views.disconnect	social:disconnect
-http://89.108.77.14/disconnect/<str:backend>/<int:association_id>/	social_django.views.disconnect	social:disconnect_individual
-http://89.108.77.14/login/<str:backend>/	social_django.views.auth	social:begin
-http://89.108.77.14/media/<path>	django.views.static.serve
 http://89.108.77.14/orders/	ordersapp.views.OrderList	orders:list
-http://89.108.77.14/orders/create/	ordersapp.views.OrderCreate	orders:create
-http://89.108.77.14/orders/delete/<int:pk>/	ordersapp.views.OrderDelete	orders:delete
-http://89.108.77.14/orders/forming-complete/<int:pk>/	ordersapp.views.order_forming_complete	orders:forming_complete
-http://89.108.77.14/orders/product/<int:pk>/price/	ordersapp.views.get_product_price	orders:product_price
-http://89.108.77.14/orders/read/<int:pk>/	ordersapp.views.OrderRead	orders:read
-http://89.108.77.14/orders/update/<int:pk>/	ordersapp.views.OrderUpdate	orders:update
-http://89.108.77.14/products/	products.views.products	products:index
-http://89.108.77.14/products/category/<int:id>	products.views.products	products:category
-http://89.108.77.14/products/page/<int:page>	products.views.products	products:page
-http://89.108.77.14/products/prod/<int:pk>	products.views.ProductDetailView	products:prod
-http://89.108.77.14/users/login/	users.views.LoginListView	users:login
-http://89.108.77.14/users/logout/	users.views.logout	users:logout
-http://89.108.77.14/users/profile/	users.views.ProfileFormView	users:profile
-http://89.108.77.14/users/register/	users.views.RegisterListView	users:register
-http://89.108.77.14/users/verify/<str:email>/<str:activation_key>/	users.views.verify	users:verify
+
