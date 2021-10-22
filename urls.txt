@@ -1,2 +1,1 @@
-http://89.108.77.14/orders/	ordersapp.views.OrderList	orders:list
-
+http://89.108.77.14/users/login/	users.views.LoginListView	users:login
