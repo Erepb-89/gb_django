@@ -110,9 +110,9 @@ class ProfileFormView(LoginRequiredMixin, UpdateView):
         })
 
 
-# def logout(request):
-#     auth.logout(request)
-#     return HttpResponseRedirect(reverse('index'))
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('index'))
 
-class Logout(LogoutView):
-    template_name = "products/index.html"
+# class Logout(LogoutView):
+#     template_name = "products/index.html"
