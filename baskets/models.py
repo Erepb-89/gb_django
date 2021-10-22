@@ -39,12 +39,12 @@ class Basket(models.Model):
         return self.user.basket.select_related()
 
     def total_quantity(self):
-        baskets = self.get_items_cached
-        return sum(basket.quantity for basket in baskets)
+        _baskets = self.get_items_cached
+        return sum(basket.quantity for basket in _baskets)
 
     def total_sum(self):
-        baskets = self.get_items_cached
-        return sum(basket.sum() for basket in baskets)
+        _baskets = self.get_items_cached
+        return sum(basket.sum() for basket in _baskets)
 
 
     @staticmethod

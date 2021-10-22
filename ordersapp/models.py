@@ -26,7 +26,7 @@ class Order(models.Model):
     created = models.DateTimeField(verbose_name='create', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='update', auto_now=True)
     status = models.CharField(verbose_name='status', max_length=3, default=FORMING, choices=ORDER_CHOICES)
-    is_active = models.BooleanField(verbose_name='active', default=True)
+    is_active = models.BooleanField(verbose_name='active', default=True, db_index=True)
 
     def __str__(self):
         return f'Текущий заказ {self.pk}'
@@ -36,16 +36,16 @@ class Order(models.Model):
     #     return self.orderitems.select_related()
 
     def get_total_quantity(self):
-        items = self.orderitems.select_related()
-        return sum(list(map(lambda x: x.quantity, items)))
+        _items = self.orderitems.select_related()
+        return sum(list(map(lambda x: x.quantity, _items)))
 
     def get_total_cost(self):
-        items = self.orderitems.select_related()
-        return sum(list(map(lambda x: x.get_product_cost(), items)))
+        _items = self.orderitems.select_related()
+        return sum(list(map(lambda x: x.get_product_cost(), _items)))
 
     def delete(self, using=None, keep_parents=False):
-        items = self.orderitems.select_related()
-        for item in items:
+        _items = self.orderitems.select_related()
+        for item in _items:
             item.product.quantity += item.quantity
             item.product.save()
         self.is_active = False
