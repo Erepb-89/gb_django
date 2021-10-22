@@ -7,7 +7,7 @@ from django.conf import settings
 
 from django.core.mail import send_mail
 
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import FormView, UpdateView
 
 from django.contrib.messages.views import SuccessMessageMixin
@@ -110,6 +110,9 @@ class ProfileFormView(LoginRequiredMixin, UpdateView):
         })
 
 
-def logout(request):
-    auth.logout(request)
-    return HttpResponseRedirect(reverse('index'))
+# def logout(request):
+#     auth.logout(request)
+#     return HttpResponseRedirect(reverse('index'))
+
+class Logout(LogoutView):
+    template_name = "products/index.html"
