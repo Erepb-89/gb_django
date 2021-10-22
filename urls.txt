@@ -27,7 +27,6 @@ http://89.108.77.14/admin/products/productscategory/
 http://89.108.77.14/admin/products/productscategory/
 http://89.108.77.14/admin/products/productscategory/
 http://89.108.77.14/admin/products/productscategory/add/
-http://89.108.77.14/admin/r/<int:content_type_id>/<path:object_id>/
 http://89.108.77.14/admin/social_django/association/
 http://89.108.77.14/admin/social_django/association/<path:object_id>/
 http://89.108.77.14/admin/social_django/association/<path:object_id>/change/
@@ -70,8 +69,6 @@ http://89.108.77.14/baskets/baskets_add/<int:id>
 http://89.108.77.14/baskets/delete/<int:id>
 http://89.108.77.14/baskets/edit/<int:id>/<int:quantity>/
 http://89.108.77.14/complete/<str:backend>/
-http://89.108.77.14/disconnect/<str:backend>/
-http://89.108.77.14/disconnect/<str:backend>/<int:association_id>/
 http://89.108.77.14/login/<str:backend>/
 http://89.108.77.14/media/<path>
 http://89.108.77.14/orders/
@@ -88,4 +85,5 @@ http://89.108.77.14/products/prod/<int:pk>
 http://89.108.77.14/users/logout/
 http://89.108.77.14/users/profile/
 http://89.108.77.14/users/register/
-http://89.108.77.14/users/verify/<str:email>/<str:activation_key>/
+http://89.108.77.14/disconnect/<str:backend>/
+http://89.108.77.14/disconnect/<str:backend>/<int:association_id>/
