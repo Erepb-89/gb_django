@@ -20,7 +20,7 @@ app_name = 'products'
 
 urlpatterns = [
     path('', products, name='index'),
-    path('category/<int:id>', products, name='category'),
-    path('page/<int:page>', products, name='page'),
-    path('prod/<int:pk>', ProductDetailView.as_view(), name='prod'),
+    path('category/<int:id>/', products, name='category'),
+    path('page/<int:page>/', products, name='page'),
+    path('prod/', ProductDetailView.as_view(), name='prod'),
 ]

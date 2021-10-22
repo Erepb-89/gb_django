@@ -20,7 +20,7 @@ from baskets.views import baskets_add, baskets_remove, baskets_edit
 app_name = 'baskets'
 
 urlpatterns = [
-    path('baskets_add/<int:id>', baskets_add, name='baskets_add'),
-    path('delete/<int:id>', baskets_remove, name='baskets_remove'),
+    path('baskets_add/<int:id>/', baskets_add, name='baskets_add'),
+    path('delete/<int:id>/', baskets_remove, name='baskets_remove'),
     path('edit/<int:id>/<int:quantity>/', baskets_edit, name='baskets_edit'),
 ]
