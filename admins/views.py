@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -7,12 +8,20 @@ from django.utils.decorators import method_decorator
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
+from django.db import connection
+
 from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, ProductAdminForm, CategoryAdminForm
 from users.models import User
 from products.models import ProductsCategory, Product
 
 
 # Create your views here.
+
+def db_profile_by_type(prefix, type, queries):
+    update_queries = list(filter(lambda x: type in x['sql'], queries))
+    print(f'db_profile {type} for {prefix}:')
+    [print(query['sql']) for query in update_queries]
+
 
 def index(request):
     return render(request, 'admins/admin.html')
@@ -55,6 +64,16 @@ class CategoriesUpdateView(UpdateView):
     template_name = 'admins/admin-categories-update-delete.html'
     form_class = CategoryAdminForm
     success_url = reverse_lazy('admins:admin_categories')
+
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                print(f'применяется скидка {discount} % к товарам категории {self.object.name}')
+                self.object.product_set.update(price=F('price') * (1 - discount / 100))
+                db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
+
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CategoriesUpdateView, self).get_context_data(**kwargs)

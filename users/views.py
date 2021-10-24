@@ -96,7 +96,7 @@ class ProfileFormView(LoginRequiredMixin, UpdateView):
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
-        user = self.get_object()
+        user = self.get_object().select_related()
         form = UserProfileForm(data=request.POST, instance=user, files=request.FILES)
         profile_form = UserProfileEditForm(data=request.POST, instance=user.userprofile)
         if form.is_valid() and profile_form.is_valid():

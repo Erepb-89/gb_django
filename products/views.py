@@ -19,11 +19,11 @@ def get_links_category():
         key = 'links_category'
         links_category = cache.get(key)
         if links_category is None:
-            links_category = ProductsCategory.objects.filter(is_active=True)
+            links_category = ProductsCategory.objects.filter(is_active=True).select_related()
             cache.set(key, links_category)
         return links_category
     else:
-        return ProductsCategory.objects.filter(is_active=True)
+        return ProductsCategory.objects.filter(is_active=True).select_related()
 
 
 def get_links_product():
