@@ -94,22 +94,22 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'NAME': 'geekshop',
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'USER': 'postgres',
-#         'PASSWORD': 'geekbrains',
-#         # 'HOST': 'localhost'
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'NAME': 'geekshop',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
+        'PASSWORD': 'geekbrains',
+        # 'HOST': 'localhost'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -161,7 +161,7 @@ LOGIN_URL = '/users/login/'
 DOMAIN_NAME = 'http://localhost:8000'
 
 EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 25
+EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TSL = False
