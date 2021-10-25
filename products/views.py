@@ -73,9 +73,10 @@ class ProductDetailView(DetailView):
 # @never_cache
 # @cache_page(3600)
 def products(request, id=None, page=1):
-    products = Product.objects.filter(category_id=id).select_related(
-        'category') if id is not None and id != 0 else Product.objects.all().select_related()
-    products = get_links_product()
+    # products = Product.objects.filter(category_id=id).select_related(
+    #     'category') if id is not None and id != 0 else Product.objects.all().select_related()
+    products = get_links_product().filter(category_id=id).select_related(
+            'category') if id is not None and id != 0 else Product.objects.all().select_related()
     paginator = Paginator(products, per_page=3)
     try:
         products_paginator = paginator.page(page)

@@ -31,6 +31,10 @@
                         <h5>Цена: {{ product.price }} руб.</h5>
                         <h5>В наличии: {{ product.quantity }} шт.</h5>
                     </div>
+                    <div class="card-footer text-center">
+                        <a href="{% url 'baskets:baskets_add' product.id %}"
+                           class="btn btn-outline-success">Отправить в корзину</a>
+                    </div>
                 </div>
             </div>
         </div>
